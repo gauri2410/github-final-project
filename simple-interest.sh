@@ -1,26 +1,32 @@
-#!/bin/bash
-# This script calculates simple interest given principal, annual rate of interest and time period in years.
-# Do not use this in production. Sample purpose only.
+#!/usr/bin/env bash
 
-# Author: Upkar Lidder (IBM)
-# Additional Authors:
-# <your Github username>
+set -eu
+export LC_NUMERIC=C
 
-# Input:
-# p, principal amount
-# t, time period in years
-# r, annual rate of interest
+is_non_negative_number() {
+    [[ $1 =~ ^([0-9]+([.][0-9]*)?|[.][0-9]+)$ ]]
+}
 
-# Output:
-# simple interest = p*t*r
+read -r -p "Principal: " principal
+if ! is_non_negative_number "$principal" || ! awk -v value="$principal" 'BEGIN { exit !(value > 0) }'; then
+    printf 'Error: principal must be a positive number.\n' >&2
+    exit 1
+fi
 
-echo "Enter the principal:"
-read p
-echo "Enter rate of interest per year:"
-read r
-echo "Enter time period in years:"
-read t
+read -r -p "Annual interest rate (%): " rate
+if ! is_non_negative_number "$rate"; then
+    printf 'Error: rate must be a non-negative number.\n' >&2
+    exit 1
+fi
 
-s=$(expr $p \* $t \* $r / 100)
-echo "The simple interest is: "
-echo $s
+read -r -p "Time (years): " time
+if ! is_non_negative_number "$time"; then
+    printf 'Error: time must be a non-negative number.\n' >&2
+    exit 1
+fi
+
+awk -v principal="$principal" -v rate="$rate" -v time="$time" 'BEGIN {
+    interest = principal * rate * time / 100
+    printf "Simple interest: %.2f\n", interest
+    printf "Total amount: %.2f\n", principal + interest
+}'

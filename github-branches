@@ -1,0 +1,10 @@
+PS D:\intrest-calculator\git-lab> git checkout main
+Your branch is up to date with 'origin/main'.
+Already on 'main'
+PS D:\intrest-calculator\git-lab> git branch -avv
+  bug-fix-revert                d0d96f3 Correct simple interest formula in README
+  bug-fix-typo                  b7c194a Fix typo in author comment
+* main                          9793e58 [origin/main] Fix typo in author comment
+  remotes/origin/HEAD           -> origin/main
+  remotes/origin/bug-fix-revert 6deda93 Correct simple interest formula
+  remotes/origin/main           9793e58 Fix typo in author comment

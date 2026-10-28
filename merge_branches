@@ -1,0 +1,8 @@
+PS D:\intrest-calculator\git-lab> git checkout main
+Your branch is up to date with 'origin/main'.
+Switched to branch 'main'
+PS D:\intrest-calculator\git-lab> git merge bug-fix-typo
+Updating ad95b0a..b7c194a
+Fast-forward
+ simple-interest.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
